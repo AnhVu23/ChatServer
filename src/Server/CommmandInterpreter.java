@@ -42,6 +42,7 @@ public class CommmandInterpreter implements Runnable, Observer {
                 if(clientUser != null) {
                     ChatMessage newMessage = new ChatMessage(command, clientUser);
                     ChatHistory.getInstance().insert(newMessage);
+                    printStream.println(newMessage.toString());
                 }
                 else {
                     printStream.println("Username not set. Give :user command");
@@ -71,7 +72,7 @@ public class CommmandInterpreter implements Runnable, Observer {
                         }
                         break;
                     case ":messages":
-                        printStream.println("History:");
+                        printStream.println(ChatHistory.getInstance().toString());
                         break;
                     case ":quit":
                         printStream.println("Quit");
@@ -88,5 +89,7 @@ public class CommmandInterpreter implements Runnable, Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        printStream.println("Good bye!");
+        printStream.println("Connection closed by foreign host");
     }
 }

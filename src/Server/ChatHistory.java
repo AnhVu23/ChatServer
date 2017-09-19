@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class ChatHistory extends Observable{
-    private ArrayList<ChatMessage> chatMessageList;
+    private static ArrayList<ChatMessage> chatMessageList = new ArrayList<>();
     private static ChatHistory ourInstance = new ChatHistory();
 
     public static ChatHistory getInstance() {
@@ -17,7 +17,7 @@ public class ChatHistory extends Observable{
     public void insert(ChatMessage message) {
         chatMessageList.add(message);
         setChanged();
-        notifyObservers();
+        notifyObservers(chatMessageList);
     }
 
     public String getLatestMessage() {
@@ -31,5 +31,9 @@ public class ChatHistory extends Observable{
             formattedString += message.toString();
         }
         return formattedString;
+    }
+
+    public static ArrayList<ChatMessage> getChatMessageList() {
+        return chatMessageList;
     }
 }

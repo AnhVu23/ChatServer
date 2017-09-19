@@ -12,12 +12,7 @@ public class UserNameList {
 
 
     public boolean checkExistingUser(Users userCheck) {
-        for(Users user : Users.getUsersHashSet()) {
-            if(userCheck.equals(user)) {
-                return true;
-            }
-        }
-        return false;
+        return Users.getUsersHashSet().contains(userCheck);
     }
 
     public void insertUser(Users user) {
