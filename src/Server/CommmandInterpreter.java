@@ -8,7 +8,7 @@ import java.util.Observer;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class CommmandInterpreter implements Runnable, Observer {
+public class CommmandInterpreter implements Runnable, ChatObserver {
     private ChatHistory ov;
     InputStream inputStream;
     PrintStream printStream;
@@ -20,14 +20,7 @@ public class CommmandInterpreter implements Runnable, Observer {
         this.inputStream = inputStream;
         this.printStream = printStream;
         ov = ChatHistory.getInstance();
-        ov.addObserver(this);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if(o == ov) {
-            ov.getLatestMessage();
-        }
+        ov.register(this);
     }
 
     @Override
@@ -42,7 +35,6 @@ public class CommmandInterpreter implements Runnable, Observer {
                 if(clientUser != null) {
                     ChatMessage newMessage = new ChatMessage(command, clientUser);
                     ChatHistory.getInstance().insert(newMessage);
-                    printStream.println(newMessage.toString());
                 }
                 else {
                     printStream.println("Username not set. Give :user command");
@@ -91,5 +83,11 @@ public class CommmandInterpreter implements Runnable, Observer {
         }
         printStream.println("Good bye!");
         printStream.println("Connection closed by foreign host");
+    }
+
+
+    @Override
+    public void update() {
+        printStream.println(ChatHistory.getInstance().getLatestMessage());
     }
 }
