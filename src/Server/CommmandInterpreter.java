@@ -61,8 +61,13 @@ public class CommmandInterpreter implements Runnable, Observer {
                         else {
                             String secondToken = stringTokenizer.nextToken();
                             clientUser = new Users(secondToken);
-                            System.out.println("Username is " + clientUser.toString());
-                            UserNameList.getInstance().insertUser(clientUser);
+                            if(!UserNameList.getInstance().checkExistingUser(clientUser)) {
+                                printStream.println("Username is " + clientUser.toString());
+                                UserNameList.getInstance().insertUser(clientUser);
+                            }
+                            else {
+                                printStream.println("Username already exist");
+                            }
                         }
                         break;
                     case ":messages":
