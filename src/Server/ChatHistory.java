@@ -17,7 +17,7 @@ public class ChatHistory implements ChatObservable{
 
     public void insert(ChatMessage message) {
         chatMessageList.add(message);
-        notify();
+        ourInstance.notify();
     }
 
     public String getLatestMessage() {

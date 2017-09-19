@@ -2,6 +2,7 @@ package Server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,7 +42,7 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
                 }
             }
             else {
-                StringTokenizer stringTokenizer = new StringTokenizer(command.toLowerCase(), " ");
+                StringTokenizer stringTokenizer = new StringTokenizer(command, " ");
                 String firstToken = stringTokenizer.nextToken();
                 switch (firstToken) {
                     case ":users":
