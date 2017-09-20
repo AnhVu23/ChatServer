@@ -14,7 +14,7 @@ public class ChatMessage {
     }
 
     public String toString() {
-        return message + "from" + " @" + user.getName() + " " + timestamp.getTime() +"\n";
+        return message + " from" + " @" + user.getName() + " " + timestamp.getTime() +"\n";
     }
 
 

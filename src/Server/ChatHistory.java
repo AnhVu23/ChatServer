@@ -17,7 +17,7 @@ public class ChatHistory implements ChatObservable{
 
     public void insert(ChatMessage message) {
         chatMessageList.add(message);
-        ourInstance.notify();
+        ourInstance.notify(observerList);
     }
 
     public String getLatestMessage() {
@@ -26,11 +26,11 @@ public class ChatHistory implements ChatObservable{
 
     @Override
     public String toString() {
-        String formattedString = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for(ChatMessage message : chatMessageList) {
-            formattedString += message.toString();
+            stringBuilder.append(message.toString());
         }
-        return formattedString;
+        return stringBuilder.toString();
     }
 
     public static ArrayList<ChatMessage> getChatMessageList() {

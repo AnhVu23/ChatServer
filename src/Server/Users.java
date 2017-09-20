@@ -35,6 +35,6 @@ public class Users {
 
     @Override
     public String toString() {
-        return this.name + " ";
+        return this.name + "\n";
     }
 }
