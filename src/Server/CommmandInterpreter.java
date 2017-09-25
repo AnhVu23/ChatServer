@@ -36,6 +36,8 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
                 if(clientUser != null) {
                     ChatMessage newMessage = new ChatMessage(command, clientUser);
                     ChatHistory.getInstance().insert(newMessage);
+                    ChatConsole chatConsole = new ChatConsole();
+                    chatConsole.update();
                 }
                 else {
                     printStream.println("Username not set. Give :user command");
