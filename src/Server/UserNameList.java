@@ -26,4 +26,12 @@ public class UserNameList {
             Users.getUsersHashSet().remove(user);
         }
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Users user : Users.getUsersHashSet()) {
+            stringBuilder.append(user.toString());
+        }
+        return stringBuilder.toString();
+    }
 }

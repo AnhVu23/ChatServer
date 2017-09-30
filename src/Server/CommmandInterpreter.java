@@ -50,9 +50,7 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
                     case ":users":
                         if(!stringTokenizer.hasMoreTokens()) {
                             printStream.println("Users:");
-                            for (Users user : Users.getUsersHashSet()) {
-                                printStream.print(user.toString());
-                            }
+                            UserNameList.getInstance().toString();
                         }
                         else {
                             String secondToken = stringTokenizer.nextToken();
