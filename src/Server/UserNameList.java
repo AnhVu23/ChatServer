@@ -27,6 +27,15 @@ public class UserNameList {
         }
     }
 
+    public Users getUser(String userName) {
+        for(Users user : Users.getUsersHashSet()) {
+            if(user.getName().equals(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Users user : Users.getUsersHashSet()) {

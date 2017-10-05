@@ -2,10 +2,7 @@ package Server;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -50,17 +47,19 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
                     case ":users":
                         if(!stringTokenizer.hasMoreTokens()) {
                             printStream.println("Users:");
-                            UserNameList.getInstance().toString();
+                            printStream.println(UserNameList.getInstance().toString());
                         }
                         else {
                             String secondToken = stringTokenizer.nextToken();
-                            clientUser = new Users(secondToken);
-                            if(!UserNameList.getInstance().checkExistingUser(clientUser)) {
+                            if(!UserNameList.getInstance().checkExistingUser(new Users(secondToken))) {
+                                clientUser = new Users(secondToken);
                                 printStream.println("Username is " + clientUser.toString());
                                 UserNameList.getInstance().insertUser(clientUser);
                             }
                             else {
                                 printStream.println("Username already exist");
+                                clientUser = UserNameList.getInstance().getUser(secondToken);
+                                
                             }
                         }
                         break;
