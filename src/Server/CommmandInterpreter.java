@@ -43,31 +43,33 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
             else {
                 StringTokenizer stringTokenizer = new StringTokenizer(command, " ");
                 String firstToken = stringTokenizer.nextToken();
-                switch (firstToken) {
+                switch (firstToken) { //Check the first word
                     case ":users":
                         if(!stringTokenizer.hasMoreTokens()) {
-                            printStream.println("Users:");
-                            printStream.println(UserNameList.getInstance().toString());
+                            printStream.print("Users:" + "\n");
+                            printStream.print(UserNameList.getInstance().toString());
                         }
-                        else {
+                        else { //If it is users, check the second word
                             String secondToken = stringTokenizer.nextToken();
                             if(!UserNameList.getInstance().checkExistingUser(new Users(secondToken))) {
                                 clientUser = new Users(secondToken);
-                                printStream.println("Username is " + clientUser.toString());
+                                printStream.print("Username is " + clientUser.toString());
                                 UserNameList.getInstance().insertUser(clientUser);
                             }
                             else {
                                 printStream.println("Username already exist");
                                 clientUser = UserNameList.getInstance().getUser(secondToken);
-                                
+
                             }
                         }
                         break;
                     case ":messages":
-                        printStream.println(ChatHistory.getInstance().toString());
+                        printStream.print(ChatHistory.getInstance().toString());
                         break;
-                    case ":quit":
+                    case ":quit": //End of Command Interpreter
                         printStream.println("Quit");
+                        printStream.println("Good bye!");
+                        printStream.println("Connection closed by foreign host");
                         quit = true;
                         break;
                     default:
@@ -84,10 +86,8 @@ public class CommmandInterpreter implements Runnable, ChatObserver {
         printStream.println("Good bye!");
         printStream.println("Connection closed by foreign host");
     }
-
-
     @Override
     public void update() {
-        printStream.println(ChatHistory.getInstance().getLatestMessage());
+        printStream.print(ChatHistory.getInstance().getLatestMessage());
     }
 }

@@ -12,7 +12,7 @@ public class ChatServer {
     }
 
     public void serve() {
-        try {
+        try { //Create a fix server socket
             ServerSocket serverSocket = new ServerSocket(44444);
             while(true) {
                 System.out.println("The port which server is listening is " + serverSocket.getLocalPort());
